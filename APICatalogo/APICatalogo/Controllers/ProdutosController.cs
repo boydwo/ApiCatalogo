@@ -59,7 +59,7 @@ namespace APICatalogo.Controllers
         {
             if(id != produto.ProdutoId)
             {
-                return BadRequest();
+                return BadRequest();//zx\
             }
 
             _context.Entry(produto).State = EntityState.Modified;
