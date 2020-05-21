@@ -113,4 +113,7 @@ C:\Projetos\GitHub\ApiCatalogo\APICatalogo\APICatalogo\bin\Debug\netcoreapp3.0\r
 C:\Projetos\GitHub\ApiCatalogo\APICatalogo\APICatalogo\bin\Debug\netcoreapp3.0\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Projetos\GitHub\ApiCatalogo\APICatalogo\APICatalogo\bin\Debug\netcoreapp3.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Projetos\GitHub\ApiCatalogo\APICatalogo\APICatalogo\bin\Debug\netcoreapp3.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Projetos\GitHub\ApiCatalogo\APICatalogo\APICatalogo\bin\Debug\netcoreapp3.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\Projetos\GitHub\ApiCatalogo\APICatalogo\APICatalogo\bin\Debug\netcoreapp3.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Projetos\GitHub\ApiCatalogo\APICatalogo\APICatalogo\bin\Debug\netcoreapp3.0\Newtonsoft.Json.Bson.dll
 C:\Projetos\GitHub\ApiCatalogo\APICatalogo\APICatalogo\obj\Debug\netcoreapp3.0\APICatalogo.MvcApplicationPartsAssemblyInfo.cache
