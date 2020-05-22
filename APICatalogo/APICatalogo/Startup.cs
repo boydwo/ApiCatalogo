@@ -47,12 +47,15 @@ namespace APICatalogo
 
             app.UseHttpsRedirection();
 
+            // adiciona middleware de roteamento
             app.UseRouting();
 
             app.UseAuthorization();
 
+            //Adiciona o middleware que execua o endpoint do request atual
             app.UseEndpoints(endpoints =>
             {
+                // adiciona os endpoints para actions dos controladores sem especificar rotas
                 endpoints.MapControllers();
             });
         }
