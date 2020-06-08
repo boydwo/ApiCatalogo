@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using APICatalogo.Context;
+using APICatalogo.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -30,6 +31,9 @@ namespace APICatalogo
             // Registrando o context como serviço e o BD => appsettings.json
             services.AddDbContext<AppDbContext>(options => options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
             services.AddControllers();
+
+            //Vai ser criada cada vez que for solicitada
+            services.AddTransient<IMeuServico, MeuServico>();
 
             //remove excessao no Json
             services.AddControllers().AddNewtonsoftJson(options =>

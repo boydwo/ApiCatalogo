@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using APICatalogo.Context;
 using APICatalogo.Models;
+using APICatalogo.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -19,6 +20,13 @@ namespace APICatalogo.Controllers
         public CategoriasController(AppDbContext contexto)
         {
             _context = contexto;
+        }
+
+        //utilizando FromService
+        [HttpGet("saudacao/{nome}")]
+        public ActionResult<string> GetSaudacao([FromServices] IMeuServico meuservico, string nome)
+        {
+            return meuservico.Saudacao(nome);
         }
 
         //novo endpoint
