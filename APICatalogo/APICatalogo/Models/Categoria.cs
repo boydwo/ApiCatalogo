@@ -19,7 +19,7 @@ namespace APICatalogo.Models
         [Key]
         public int CategoriaId { get; set; }
 
-        [Required]
+        [Required] //DataAnnotations
         [MaxLength(80)]
         public string Nome { get; set; }
 

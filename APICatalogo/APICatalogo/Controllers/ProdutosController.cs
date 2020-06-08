@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace APICatalogo.Controllers
 {
     [Route("api/[Controller]")]
-    [ApiController]
+    [ApiController] // facilita para fazer validações dos models
     public class ProdutosController : ControllerBase
     {
         //injeção de dependencia do serviço
