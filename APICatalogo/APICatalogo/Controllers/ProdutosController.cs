@@ -42,7 +42,7 @@ namespace APICatalogo.Controllers
         [HttpPost]
         public ActionResult Post([FromBody]Produto produto)
         {
-            //Desde a versão 2.1 essa validação ja é feita
+            //Desde a versão 2.1 essa validação ja é feita atrave do [ApiController] 
             // if (!ModelState.IsValid)
             // {
             //   return BadRequest(ModelState);
