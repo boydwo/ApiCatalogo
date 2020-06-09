@@ -1,4 +1,5 @@
-﻿using System;
+﻿using APICatalogo.validations;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 namespace APICatalogo.Models
 {
     [Table("Produtos")]
-    public class Produto
+    public class Produto : IValidatableObject
     {
 
         [Key]
@@ -16,6 +17,7 @@ namespace APICatalogo.Models
 
         [Required(ErrorMessage = "O nome é obrigatorio")]
         [StringLength(20, ErrorMessage = "O nome deve ter entre 5 e 20 caracters", MinimumLength = 5)]
+        [PrimeiraLetraMaiuscula] // chamando classe de Attributo de validação
         public string Nome { get; set; }
 
         [Required]
@@ -37,5 +39,32 @@ namespace APICatalogo.Models
 
         public Categoria Categoria { get; set; }
         public int CategoriaId { get; set; }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (!string.IsNullOrEmpty(this.Nome))
+            {
+                var primeiraLetra = this.Nome[0].ToString();
+                if(primeiraLetra != primeiraLetra.ToUpper())
+
+                {
+                    //  indica que é um retornador
+                    yield return new ValidationResult("A primeira letra do produto deve ser maiuscula",
+                        new[]
+                        {
+                            nameof(this.Nome)
+                        });
+                }
+            }
+
+            if(this.Estoque <= 0)
+            {
+                yield return new ValidationResult("o Estoque deve ser maior que 0",
+                    new[]
+                    {
+                        nameof(this.Nome)
+                    });
+            }
+        }
     }
 }
