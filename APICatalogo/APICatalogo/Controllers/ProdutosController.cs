@@ -1,4 +1,5 @@
 ﻿using APICatalogo.Context;
+using APICatalogo.Filter;
 using APICatalogo.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -22,15 +23,19 @@ namespace APICatalogo.Controllers
 
 
         [HttpGet]
+        [ServiceFilter(typeof(ApiLoggingFilter))]
         public async Task<ActionResult<IEnumerable<Produto>>> Get() //para operções que idependem do sistema usar async/await
         {
             // AsNoTracking() aumenta desempenho
             return await _context.Produtos.AsNoTracking().ToListAsync();
         }
 
-        [HttpGet("{id:int:min(1)}", Name = "ObterProduto")]
+        [HttpGet("{id}", Name = "ObterProduto")]
         public async Task<ActionResult<Produto>> Get(int id)// Task representa uma unica operação que retorna um valor
         {
+            // chamdno erros de exceção 
+            //throw new Exception("Exception ao retornar produto pelo id");
+
             var produto = await _context.Produtos.AsNoTracking().FirstOrDefaultAsync(p => p.ProdutoId == id);
             if (produto == null)
             {
@@ -50,14 +55,14 @@ namespace APICatalogo.Controllers
 
             _context.Produtos.Add(produto);
             _context.SaveChanges();
-            
-            return new CreatedAtRouteResult("ObterProduto",new { id = produto.ProdutoId }, produto);
+
+            return new CreatedAtRouteResult("ObterProduto", new { id = produto.ProdutoId }, produto);
         }
 
         [HttpPut("{id}")]
-        public ActionResult Put(int id,[FromBody] Produto produto)
+        public ActionResult Put(int id, [FromBody] Produto produto)
         {
-            if(id != produto.ProdutoId)
+            if (id != produto.ProdutoId)
             {
                 return BadRequest();//zx\
             }
@@ -71,9 +76,9 @@ namespace APICatalogo.Controllers
         [HttpDelete("{id}")]
         public ActionResult<Produto> Delete(int id)
         {
-             var produto = _context.Produtos.FirstOrDefault(p => p.ProdutoId == id);
+            var produto = _context.Produtos.FirstOrDefault(p => p.ProdutoId == id);
             // var produto = _context.Produtos.Find(id);  Se for chave primaria
-            
+
             if (produto == null)
             {
                 return BadRequest();

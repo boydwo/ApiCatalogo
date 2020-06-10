@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using APICatalogo.Context;
+using APICatalogo.Extensions;
+using APICatalogo.Filter;
 using APICatalogo.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -28,6 +30,9 @@ namespace APICatalogo
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //Registrando Logging
+            services.AddScoped<ApiLoggingFilter>();
+
             // Registrando o context como serviço e o BD => appsettings.json
             services.AddDbContext<AppDbContext>(options => options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
             services.AddControllers();
@@ -48,6 +53,10 @@ namespace APICatalogo
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            // adicionando midlleare de tratamentos de erro
+            app.ConfigureExceptionHandler();
+
             // adiciona middlware para redirecionar https
             app.UseHttpsRedirection();
 
