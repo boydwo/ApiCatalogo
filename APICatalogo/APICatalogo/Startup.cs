@@ -48,12 +48,13 @@ namespace APICatalogo
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            // adiciona middlware para redirecionar https
             app.UseHttpsRedirection();
 
             // adiciona middleware de roteamento
             app.UseRouting();
 
+            // adiciona middleware que habilita a autorização
             app.UseAuthorization();
 
             //Adiciona o middleware que execua o endpoint do request atual
