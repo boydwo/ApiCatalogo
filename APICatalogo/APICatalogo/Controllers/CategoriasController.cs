@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 
 namespace APICatalogo.Controllers
 {
@@ -18,16 +19,19 @@ namespace APICatalogo.Controllers
     {
         private readonly AppDbContext _context;
         private readonly IConfiguration _configuration;
+        private readonly ILogger _logger;
 
-        public CategoriasController(AppDbContext contexto, IConfiguration config)
+        public CategoriasController(AppDbContext contexto, IConfiguration config, ILogger<CategoriasController> logger)
         {
             _context = contexto;
             _configuration = config;
+            _logger = logger;
         }
 
         [HttpGet("autor")]
         public string GetAutor()
         {
+            _logger.LogInformation(" ======= GET api/categorias/produtos  ========= ");
             var autor = _configuration["autor"];
             //var conexao = _configuration["ConnectionStrings: DefaultConnection"];
 
