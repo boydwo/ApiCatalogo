@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace APICatalogo.Repository
 {
-    interface IProdutoRepository : IRepository<Produto>
+    public interface IProdutoRepository : IRepository<Produto>
     {
         IEnumerable<Produto> GetProdutoPorPreco();
 
