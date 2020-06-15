@@ -1,12 +1,12 @@
 ﻿using APICatalogo.Context;
 using APICatalogo.Filter;
 using APICatalogo.Models;
+using APICatalogo.Repository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace APICatalogo.Controllers
 {
@@ -14,29 +14,25 @@ namespace APICatalogo.Controllers
     [ApiController] // facilita para fazer validações dos models
     public class ProdutosController : ControllerBase
     {
-        //injeção de dependencia do serviço
-        private readonly AppDbContext _context;
-        public ProdutosController(AppDbContext contexto)
+        private readonly IUnitOfWork _uof;
+        public ProdutosController(IUnitOfWork contexto)
         {
-            _context = contexto;
+            _uof = contexto;
         }
 
 
         [HttpGet]
-        [ServiceFilter(typeof(ApiLoggingFilter))]
-        public async Task<ActionResult<IEnumerable<Produto>>> Get() //para operções que idependem do sistema usar async/await
+        public ActionResult<IEnumerable<Produto>>Get() 
         {
-            // AsNoTracking() aumenta desempenho
-            return await _context.Produtos.AsNoTracking().ToListAsync();
-        }
+            return _uof.ProdutoRepository.Get().ToList();
 
         [HttpGet("{id}", Name = "ObterProduto")]
-        public async Task<ActionResult<Produto>> Get(int id)// Task representa uma unica operação que retorna um valor
+        public ActionResult<Produto> Get(int id)// Task representa uma unica operação que retorna um valor
         {
             // chamdno erros de exceção 
             //throw new Exception("Exception ao retornar produto pelo id");
 
-            var produto = await _context.Produtos.AsNoTracking().FirstOrDefaultAsync(p => p.ProdutoId == id);
+            var produto =  _uof.Produtos.AsNoTracking().FirstOrDefault(p => p.ProdutoId == id);
             if (produto == null)
             {
                 return NotFound();
@@ -53,8 +49,8 @@ namespace APICatalogo.Controllers
             //   return BadRequest(ModelState);
             //  }
 
-            _context.Produtos.Add(produto);
-            _context.SaveChanges();
+            _uof.Produtos.Add(produto);
+            _uof.SaveChanges();
 
             return new CreatedAtRouteResult("ObterProduto", new { id = produto.ProdutoId }, produto);
         }
@@ -67,8 +63,8 @@ namespace APICatalogo.Controllers
                 return BadRequest();//zx\
             }
 
-            _context.Entry(produto).State = EntityState.Modified;
-            _context.SaveChanges();
+            _uof.Entry(produto).State = EntityState.Modified;
+            _uof.SaveChanges();
             return Ok();
         }
 
@@ -76,16 +72,16 @@ namespace APICatalogo.Controllers
         [HttpDelete("{id}")]
         public ActionResult<Produto> Delete(int id)
         {
-            var produto = _context.Produtos.FirstOrDefault(p => p.ProdutoId == id);
-            // var produto = _context.Produtos.Find(id);  Se for chave primaria
+            var produto = _uof.Produtos.FirstOrDefault(p => p.ProdutoId == id);
+            // var produto = _uof.Produtos.Find(id);  Se for chave primaria
 
             if (produto == null)
             {
                 return BadRequest();
             }
 
-            _context.Produtos.Remove(produto);
-            _context.SaveChanges();
+            _uof.Produtos.Remove(produto);
+            _uof.SaveChanges();
             return produto;
         }
 
