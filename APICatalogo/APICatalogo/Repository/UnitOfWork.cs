@@ -31,7 +31,7 @@ namespace APICatalogo.Repository
             }
         }
 
-        public void commit()
+        public void Commit()
         {
             _context.SaveChanges();
         }
