@@ -1,9 +1,11 @@
 ﻿
 using System.Collections.Generic;
 using System.Linq;
+using APICatalogo.DTOs;
 using APICatalogo.Models;
 using APICatalogo.Repository;
 using APICatalogo.Services;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
@@ -16,13 +18,15 @@ namespace APICatalogo.Controllers
     {
         private readonly IUnitOfWork _context;
         private readonly IConfiguration _configuration;
+        private readonly IMapper _mapper;
         private readonly ILogger _logger;
 
-        public CategoriasController(IUnitOfWork contexto, IConfiguration config, ILogger<CategoriasController> logger)
+        public CategoriasController(IUnitOfWork contexto, IConfiguration config, ILogger<CategoriasController> logger, IMapper mapper)
         {
             _context = contexto;
             _configuration = config;
             _logger = logger;
+            _mapper = mapper;
         }
 
         [HttpGet("autor")]
@@ -44,22 +48,26 @@ namespace APICatalogo.Controllers
 
         //novo endpoint
         [HttpGet("produtos")]
-        public ActionResult<IEnumerable<Categoria>> GetCategoriasProdutos()
+        public ActionResult<IEnumerable<CategoriaDTO>> GetCategoriasProdutos()
         {
             // retorna dados relacionados
-            return _context.CategoriaRepository.GetCategoriasProdutos().ToList();
+            var categorias = _context.CategoriaRepository.GetCategoriasProdutos().ToList();
+            var categoriasDTO = _mapper.Map<List<CategoriaDTO>>(categorias);
+            return categoriasDTO;
         }
 
 
 
         [HttpGet]
-        public ActionResult<IEnumerable<Categoria>> Get()
+        public ActionResult<IEnumerable<CategoriaDTO>> Get()
         {
-            return _context.CategoriaRepository.Get().ToList();
+            var categorias = _context.CategoriaRepository.Get().ToList();
+            var categoriasDTO = _mapper.Map<List<CategoriaDTO>>(categorias);
+            return categoriasDTO;
         }
 
         [HttpGet("{id}", Name = "ObterCategoria")]
-        public ActionResult<Categoria> Get(int id)
+        public ActionResult<CategoriaDTO> Get(int id)
         {
             var categoria = _context.CategoriaRepository.GetById(p => p.CategoriaId == id);
 
@@ -67,26 +75,35 @@ namespace APICatalogo.Controllers
             {
                 return NotFound();
             }
-            return categoria;
+
+            var categoriaDTO = _mapper.Map<CategoriaDTO>(categoria);
+
+            return categoriaDTO;
         }
+
 
 
         [HttpPost]
-        public ActionResult Post([FromBody]Categoria categoria)
+        public ActionResult Post([FromBody]CategoriaDTO categoriaDto)
         {
+            var categoria = _mapper.Map<Categoria>(categoriaDto);
             _context.CategoriaRepository.Add(categoria);
             _context.Commit();
 
-            return new CreatedAtRouteResult("ObterProduto", new { id = categoria.CategoriaId }, categoria);
+            var categoriaDTO = _mapper.Map<CategoriaDTO>(categoria);
+
+            return new CreatedAtRouteResult("ObterProduto", new { id = categoria.CategoriaId }, categoriaDTO);
         }
 
         [HttpPut("{id}")]
-        public ActionResult Put(int id, [FromBody] Categoria categoria)
+        public ActionResult Put(int id, [FromBody] CategoriaDTO categoriaDto)
         {
-            if (id != categoria.CategoriaId)
+
+            if (id != categoriaDto.CategoriaId)
             {
                 return BadRequest();
             }
+            var categoria = _mapper.Map<Categoria>(categoriaDto);
 
             _context.CategoriaRepository.Update(categoria);
             _context.Commit();
@@ -95,7 +112,7 @@ namespace APICatalogo.Controllers
 
 
         [HttpDelete("{id}")]
-        public ActionResult<Categoria> Delete(int id)
+        public ActionResult<CategoriaDTO> Delete(int id)
         {
             var categoria = _context.CategoriaRepository.GetById(p => p.CategoriaId == id);
 
@@ -106,7 +123,9 @@ namespace APICatalogo.Controllers
 
             _context.CategoriaRepository.Delete(categoria);
             _context.Commit();
-            return categoria;
+
+            var categoriaDto = _mapper.Map<CategoriaDTO>(categoria);
+            return categoriaDto;
         }
     }
 }

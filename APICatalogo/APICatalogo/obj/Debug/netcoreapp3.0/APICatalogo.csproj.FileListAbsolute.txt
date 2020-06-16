@@ -116,4 +116,4 @@ C:\Projetos\GitHub\ApiCatalogo\APICatalogo\APICatalogo\bin\Debug\netcoreapp3.0\z
 C:\Projetos\GitHub\ApiCatalogo\APICatalogo\APICatalogo\bin\Debug\netcoreapp3.0\Microsoft.AspNetCore.JsonPatch.dll
 C:\Projetos\GitHub\ApiCatalogo\APICatalogo\APICatalogo\bin\Debug\netcoreapp3.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 C:\Projetos\GitHub\ApiCatalogo\APICatalogo\APICatalogo\bin\Debug\netcoreapp3.0\Newtonsoft.Json.Bson.dll
-C:\Projetos\GitHub\ApiCatalogo\APICatalogo\APICatalogo\obj\Debug\netcoreapp3.0\APICatalogo.MvcApplicationPartsAssemblyInfo.cache
+C:\Projetos\GitHub\ApiCatalogo\APICatalogo\APICatalogo\bin\Debug\netcoreapp3.0\AutoMapper.dll
