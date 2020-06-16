@@ -1,10 +1,7 @@
-﻿using APICatalogo.Context;
-using APICatalogo.Filter;
+﻿
 using APICatalogo.Models;
 using APICatalogo.Repository;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -20,11 +17,18 @@ namespace APICatalogo.Controllers
             _uof = contexto;
         }
 
+        [HttpGet("menorpreco")]
+        public ActionResult<IEnumerable<Produto>> GetProdutoPorPreco()
+        {
+            return _uof.ProdutoRepository.GetProdutoPorPreco().ToList();
+        }
+
 
         [HttpGet]
-        public ActionResult<IEnumerable<Produto>>Get() 
+        public ActionResult<IEnumerable<Produto>> Get()
         {
             return _uof.ProdutoRepository.Get().ToList();
+        }
 
         [HttpGet("{id}", Name = "ObterProduto")]
         public ActionResult<Produto> Get(int id)// Task representa uma unica operação que retorna um valor
@@ -32,7 +36,7 @@ namespace APICatalogo.Controllers
             // chamdno erros de exceção 
             //throw new Exception("Exception ao retornar produto pelo id");
 
-            var produto =  _uof.Produtos.AsNoTracking().FirstOrDefault(p => p.ProdutoId == id);
+            var produto =  _uof.ProdutoRepository.GetById(p => p.ProdutoId == id);
             if (produto == null)
             {
                 return NotFound();
@@ -43,14 +47,9 @@ namespace APICatalogo.Controllers
         [HttpPost]
         public ActionResult Post([FromBody]Produto produto)
         {
-            //Desde a versão 2.1 essa validação ja é feita atrave do [ApiController] 
-            // if (!ModelState.IsValid)
-            // {
-            //   return BadRequest(ModelState);
-            //  }
 
-            _uof.Produtos.Add(produto);
-            _uof.SaveChanges();
+            _uof.ProdutoRepository.Add(produto);
+          
 
             return new CreatedAtRouteResult("ObterProduto", new { id = produto.ProdutoId }, produto);
         }
@@ -63,8 +62,7 @@ namespace APICatalogo.Controllers
                 return BadRequest();//zx\
             }
 
-            _uof.Entry(produto).State = EntityState.Modified;
-            _uof.SaveChanges();
+            _uof.ProdutoRepository.Update(produto);
             return Ok();
         }
 
@@ -72,7 +70,7 @@ namespace APICatalogo.Controllers
         [HttpDelete("{id}")]
         public ActionResult<Produto> Delete(int id)
         {
-            var produto = _uof.Produtos.FirstOrDefault(p => p.ProdutoId == id);
+            var produto = _uof.ProdutoRepository.GetById(p => p.ProdutoId == id);
             // var produto = _uof.Produtos.Find(id);  Se for chave primaria
 
             if (produto == null)
@@ -80,8 +78,8 @@ namespace APICatalogo.Controllers
                 return BadRequest();
             }
 
-            _uof.Produtos.Remove(produto);
-            _uof.SaveChanges();
+            _uof.ProdutoRepository.Delete(produto);
+            _uof.Commit();
             return produto;
         }
 

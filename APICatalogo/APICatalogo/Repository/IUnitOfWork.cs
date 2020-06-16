@@ -8,5 +8,6 @@ namespace APICatalogo.Repository
         ICategoriaRepository CategoriaRepository { get; }
 
         void commit();
+        void Commit();
     }
 }
