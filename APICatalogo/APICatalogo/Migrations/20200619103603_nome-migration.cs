@@ -25,14 +25,6 @@ namespace APICatalogo.Migrations
                 oldType: "varchar(80) CHARACTER SET utf8mb4",
                 oldMaxLength: 80);
 
-            migrationBuilder.AlterColumn<string>(
-                name: "Descricao",
-                table: "Produtos",
-                maxLength: 10,
-                nullable: false,
-                oldClrType: typeof(string),
-                oldType: "varchar(300) CHARACTER SET utf8mb4",
-                oldMaxLength: 300);
 
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
