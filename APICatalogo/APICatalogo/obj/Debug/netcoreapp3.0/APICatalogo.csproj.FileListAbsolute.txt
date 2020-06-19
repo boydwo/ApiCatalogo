@@ -118,4 +118,5 @@ C:\Projetos\GitHub\ApiCatalogo\APICatalogo\APICatalogo\bin\Debug\netcoreapp3.0\M
 C:\Projetos\GitHub\ApiCatalogo\APICatalogo\APICatalogo\bin\Debug\netcoreapp3.0\Newtonsoft.Json.Bson.dll
 C:\Projetos\GitHub\ApiCatalogo\APICatalogo\APICatalogo\bin\Debug\netcoreapp3.0\AutoMapper.dll
 C:\Projetos\GitHub\ApiCatalogo\APICatalogo\APICatalogo\bin\Debug\netcoreapp3.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Projetos\GitHub\ApiCatalogo\APICatalogo\APICatalogo\bin\Debug\netcoreapp3.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
 C:\Projetos\GitHub\ApiCatalogo\APICatalogo\APICatalogo\obj\Debug\netcoreapp3.0\APICatalogo.MvcApplicationPartsAssemblyInfo.cache

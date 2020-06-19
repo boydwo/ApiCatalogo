@@ -1,0 +1,4 @@
+MIGRATIONS ENTITY FRAMEWORK
+
+PM> add-migration "nome-migration" 
+

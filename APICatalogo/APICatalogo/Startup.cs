@@ -12,6 +12,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -49,6 +50,10 @@ namespace APICatalogo
 
             // Registrando o context como serviço e o BD => appsettings.json
             services.AddDbContext<AppDbContext>(options => options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
+
+            // habilitando o Identity no projeto
+            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
+
             services.AddControllers();
 
             //Vai ser criada cada vez que for solicitada
@@ -57,7 +62,7 @@ namespace APICatalogo
             //remove excessao no Json
             services.AddControllers().AddNewtonsoftJson(options =>
     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
-) ;
+);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -76,6 +81,9 @@ namespace APICatalogo
 
             // adiciona middleware de roteamento
             app.UseRouting();
+
+            //adiciona o middleware de autenticação
+            app.UseAuthentication();
 
             // adiciona middleware que habilita a autorização
             app.UseAuthorization();
