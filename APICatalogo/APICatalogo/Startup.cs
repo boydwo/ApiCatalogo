@@ -37,6 +37,9 @@ namespace APICatalogo
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // incluindo CORS
+            services.AddCors();
+
             // Registrando o mapeamento do DTO
             var mappingConfig = new MapperConfiguration(mc =>
            {
@@ -104,6 +107,10 @@ namespace APICatalogo
 
             // adiciona middleware que habilita a autorização
             app.UseAuthorization();
+
+            //adicionando CORS
+            //  restringindo CORS  app.UseCors(opt => opt.WithOrigins("https://www.apirequest.io/").WithMethods("GET"));
+            app.UseCors(op => op.AllowAnyOrigin()); // permite qualquer origem.
 
             //Adiciona o middleware que execua o endpoint do request atual
             app.UseEndpoints(endpoints =>
