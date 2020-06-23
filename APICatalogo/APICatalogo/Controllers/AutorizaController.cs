@@ -105,8 +105,8 @@ namespace APICatalogo.Controllers
 
             //Classe que representa um token Jwt e gera o token
             JwtSecurityToken token = new JwtSecurityToken(
-                issuer: _configuration["TokenConfiguration: Issuer"],
-                audience: _configuration["TokenConfiguration: audience"],
+                issuer: _configuration["TokenConfiguration:Issuer"],
+                audience: _configuration["TokenConfiguration:Audience"],
                 claims: claims,
                 expires: expiration,
                 signingCredentials: credenciais);
