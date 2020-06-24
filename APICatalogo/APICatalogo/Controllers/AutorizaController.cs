@@ -14,6 +14,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace APICatalogo.Controllers
 {
+    [Produces("application/json")] // retorno sser um json no swagger
     [Route("api/[controller]")]
     [ApiController]
     public class AutorizaController : ControllerBase
