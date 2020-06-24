@@ -13,6 +13,7 @@ using Microsoft.Extensions.Logging;
 
 namespace APICatalogo.Controllers
 {
+    [Produces("application/json")] // retorno sser um json no swagger
     [Authorize(AuthenticationSchemes = "Bearer")]
     [Route("api/[controller]")]
     [ApiController]

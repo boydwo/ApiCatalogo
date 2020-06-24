@@ -134,3 +134,4 @@ C:\Projetos\GitHub\ApiCatalogo\APICatalogo\APICatalogo\bin\Debug\netcoreapp3.0\S
 C:\Projetos\GitHub\ApiCatalogo\APICatalogo\APICatalogo\bin\Debug\netcoreapp3.0\Swashbuckle.AspNetCore.SwaggerUI.dll
 C:\Projetos\GitHub\ApiCatalogo\APICatalogo\APICatalogo\obj\Debug\netcoreapp3.0\APICatalogo.MvcApplicationPartsAssemblyInfo.cs
 C:\Projetos\GitHub\ApiCatalogo\APICatalogo\APICatalogo\obj\Debug\netcoreapp3.0\APICatalogo.MvcApplicationPartsAssemblyInfo.cache
+C:\Projetos\GitHub\ApiCatalogo\APICatalogo\APICatalogo\bin\Debug\netcoreapp3.0\APICatalogo.xml

@@ -9,6 +9,7 @@ using System.Linq;
 
 namespace APICatalogo.Controllers
 {
+    [Produces("application/json")] // retorno padrao ser um json no swagger
     [Route("api/[Controller]")]
     [ApiController] // facilita para fazer validações dos models
     public class ProdutosController : ControllerBase
