@@ -32,6 +32,10 @@ namespace APICatalogo.Controllers
         }
 
 
+        /// <summary>
+        /// Exibe uma relação dos produtos
+        /// </summary>
+        /// <returns>Retorna uma lista de produtos </returns>
         [HttpGet]
         public ActionResult<IEnumerable<ProdutoDTO>> Get()
         {
@@ -41,6 +45,11 @@ namespace APICatalogo.Controllers
             return produtosDto;
         }
 
+        /// <summary>
+        /// Obter um produto pelo seu identificador produto Id
+        /// </summary>
+        /// <param name="id">Código do produto</param>
+        /// <returns>Um objeto Produto</returns>
         [HttpGet("{id}", Name = "ObterProduto")]
         public ActionResult<ProdutoDTO> Get(int id)// Task representa uma unica operação que retorna um valor
         {

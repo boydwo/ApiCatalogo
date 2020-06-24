@@ -128,4 +128,9 @@ C:\Projetos\GitHub\ApiCatalogo\APICatalogo\APICatalogo\bin\Debug\netcoreapp3.0\M
 C:\Projetos\GitHub\ApiCatalogo\APICatalogo\APICatalogo\bin\Debug\netcoreapp3.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 C:\Projetos\GitHub\ApiCatalogo\APICatalogo\APICatalogo\bin\Debug\netcoreapp3.0\System.Security.Cryptography.Pkcs.dll
 C:\Projetos\GitHub\ApiCatalogo\APICatalogo\APICatalogo\bin\Debug\netcoreapp3.0\runtimes\win\lib\netcoreapp2.1\System.Security.Cryptography.Pkcs.dll
+C:\Projetos\GitHub\ApiCatalogo\APICatalogo\APICatalogo\bin\Debug\netcoreapp3.0\Microsoft.OpenApi.dll
+C:\Projetos\GitHub\ApiCatalogo\APICatalogo\APICatalogo\bin\Debug\netcoreapp3.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Projetos\GitHub\ApiCatalogo\APICatalogo\APICatalogo\bin\Debug\netcoreapp3.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Projetos\GitHub\ApiCatalogo\APICatalogo\APICatalogo\bin\Debug\netcoreapp3.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Projetos\GitHub\ApiCatalogo\APICatalogo\APICatalogo\obj\Debug\netcoreapp3.0\APICatalogo.MvcApplicationPartsAssemblyInfo.cs
 C:\Projetos\GitHub\ApiCatalogo\APICatalogo\APICatalogo\obj\Debug\netcoreapp3.0\APICatalogo.MvcApplicationPartsAssemblyInfo.cache

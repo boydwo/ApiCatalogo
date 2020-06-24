@@ -22,6 +22,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 
 namespace APICatalogo
 {
@@ -76,6 +77,29 @@ namespace APICatalogo
                         Encoding.UTF8.GetBytes(Configuration["Jwt:key"]))
                 });
 
+            //Swagger
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Version = "v1",
+                    Title = "APICatalogo",
+                    Description = "Catálogo de produtos e Categorias",
+                    TermsOfService = new Uri("https://marcos-tulio-rodrigues.net/terms"),
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Pajé",
+                        Email = "macoratti@yahoo.com",
+                        Url = new Uri("https://marcos-tulio-rodrigues.net/terms"),
+                    },
+                    License = new OpenApiLicense
+                    {
+                        Name = "Usar sobre LICX",
+                        Url = new Uri("https://marcos-tulio-rodrigues.net/terms")
+                    }
+                });
+            });
+
             services.AddControllers();
 
             //Vai ser criada cada vez que for solicitada
@@ -107,6 +131,16 @@ namespace APICatalogo
 
             // adiciona middleware que habilita a autorização
             app.UseAuthorization();
+
+            //Swagger
+            app.UseSwagger();
+
+            //SwaggerUI
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json",
+                    "Catálogo de Produtos e Categorias");
+            });
 
             //adicionando CORS
             //  restringindo CORS  app.UseCors(opt => opt.WithOrigins("https://www.apirequest.io/").WithMethods("GET"));

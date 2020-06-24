@@ -36,6 +36,11 @@ namespace APICatalogo.Controllers
                 + DateTime.Now.ToLongDateString();
         }
 
+        /// <summary>
+        /// Registra um novo usuario
+        /// </summary>
+        /// <param name="model">Um objeto UsuarioDTO</param>
+        /// <returns>Status 200 e o token para o cliente</returns>
         [HttpPost("register")]
         public async Task<ActionResult> RegisterUser([FromBody]UsuarioDTO model)
         {
@@ -63,6 +68,12 @@ namespace APICatalogo.Controllers
             return Ok(GeraToken(model));
         }
 
+        /// <summary>
+        /// Verifica as credenciais de um usuario
+        /// </summary>
+        /// <param name="userInfo">Um objeto do tipo UsuarioDTO</param>
+        /// <returns>Status 200 e o token para o cliente</returns>
+        /// <remarks>retorna o Status 200 e o token </remarks>
         [HttpPost("login")]
         public async Task<ActionResult> Login([FromBody] UsuarioDTO userInfo)
         {
